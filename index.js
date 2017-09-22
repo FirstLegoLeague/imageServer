@@ -1,10 +1,10 @@
-import * as http from "http"
+"use strict";
+exports.__esModule = true;
+var http = require("http");
 var staticAlias = require("node-static-alias");
 var log4js = require('log4js');
-
 var logger = log4js.getLogger('node-static-alias');
-
-var fileServer = new staticAlias.Server(`${__dirname}/images`, {
+var fileServer = new staticAlias.Server(__dirname + "/images", {
     alias: [
         {
             match: '/legoEducation',
@@ -29,7 +29,6 @@ var fileServer = new staticAlias.Server(`${__dirname}/images`, {
     ],
     logger: console
 });
-
 http.createServer(function (request, response) {
     request.addListener('end', function () {
         fileServer.serve(request, response);
